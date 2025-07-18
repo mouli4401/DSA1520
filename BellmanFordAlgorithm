@@ -1,0 +1,22 @@
+void bellmanFord(int src, vector<tuple<int, int, int>> edges, int V) {
+    vector<int> dist(V, INT_MAX);
+    dist[src] = 0;
+
+    for (int i = 1; i <= V - 1; ++i) {
+        for (auto [u, v, wt] : edges) {
+            if (dist[u] != INT_MAX && dist[v] > dist[u] + wt) {
+                dist[v] = dist[u] + wt;
+            }
+        }
+    }
+
+    // Check for negative cycle
+    for (auto [u, v, wt] : edges) {
+        if (dist[u] != INT_MAX && dist[v] > dist[u] + wt) {
+            cout << "Negative weight cycle detected\n";
+            return;
+        }
+    }
+
+    // print distances
+}
