@@ -1,0 +1,21 @@
+void dijkstra(int src, vector<pair<int, int>> adj[], int V) {
+    vector<int> dist(V, INT_MAX);
+    dist[src] = 0;
+    priority_queue<pair<int, int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+    pq.push({0, src});
+
+    while (!pq.empty()) {
+        int u = pq.top().second;
+        int d_u = pq.top().first;
+        pq.pop();
+
+        for (auto [v, wt] : adj[u]) {
+            if (dist[v] > d_u + wt) {
+                dist[v] = d_u + wt;
+                pq.push({dist[v], v});
+            }
+        }
+    }
+
+    // print distances
+}
